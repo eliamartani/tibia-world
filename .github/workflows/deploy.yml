@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy GH-Pages
 
 on:
   push:
@@ -8,10 +8,6 @@ on:
 
 permissions:
   contents: write
-
-concurrency:
-  group: deploy-gh-pages
-  cancel-in-progress: false
 
 jobs:
   deploy:
