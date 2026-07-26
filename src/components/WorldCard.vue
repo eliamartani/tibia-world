@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import serverGreenMarker from '../assets/green-world.gif'
 import worldGlobe from '../assets/world.png'
 import serverYellowMarker from '../assets/yellow-world.gif'
 
 import type { TibiaWorld } from '../types/tibia'
+
+const { t } = useI18n()
 
 const props = defineProps<{
   world: TibiaWorld
@@ -65,7 +68,7 @@ const serverMarker = computed(() =>
 
       <div class="rounded-3xl border border-white/8 bg-white/5 px-4 py-3">
         <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
-          Players Online
+          {{ t('playersOnline') }}
         </p>
         <div class="mt-2 flex items-end justify-between gap-4">
           <p class="text-3xl font-black text-white">
@@ -75,7 +78,7 @@ const serverMarker = computed(() =>
             class="inline-flex items-center gap-2 rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-emerald-200"
           >
             <span class="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_14px_rgba(110,231,183,0.9)]" />
-            Live
+            {{ t('live') }}
           </span>
         </div>
       </div>

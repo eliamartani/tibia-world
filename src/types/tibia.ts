@@ -39,7 +39,7 @@ export interface TibiaWorld {
 export interface WorldFilters {
   selectedPvpModes: string[]
   selectedRegions: string[]
-  onlyInitiallyProtected: boolean
+  protectionFilter: 'all' | 'protected' | 'unprotected'
 }
 
 export type WorldSortOption =

@@ -3,7 +3,7 @@ import type { TibiaWorld, WorldFilters, WorldSortOption } from '../types/tibia'
 export const defaultWorldFilters = (): WorldFilters => ({
   selectedPvpModes: [],
   selectedRegions: [],
-  onlyInitiallyProtected: false,
+  protectionFilter: 'all',
 })
 
 export const applyWorldFilters = (
@@ -20,7 +20,9 @@ export const applyWorldFilters = (
       filters.selectedRegions.includes(world.region)
 
     const matchesInitialProtection =
-      !filters.onlyInitiallyProtected || world.initiallyProtected
+      filters.protectionFilter === 'all' ||
+      (filters.protectionFilter === 'protected' && world.initiallyProtected) ||
+      (filters.protectionFilter === 'unprotected' && !world.initiallyProtected)
 
     return matchesPvpMode && matchesRegion && matchesInitialProtection
   })
@@ -37,7 +39,7 @@ export const collectFilterOptions = (worlds: TibiaWorld[]) => ({
 export const hasActiveFilters = (filters: WorldFilters) =>
   filters.selectedPvpModes.length > 0 ||
   filters.selectedRegions.length > 0 ||
-  filters.onlyInitiallyProtected
+  filters.protectionFilter !== 'all'
 
 export const sortWorlds = (worlds: TibiaWorld[], sortOption: WorldSortOption): TibiaWorld[] => {
   const sortedWorlds = [...worlds]

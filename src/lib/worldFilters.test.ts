@@ -63,7 +63,7 @@ describe('worldFilters', () => {
     const result = applyWorldFilters(sampleWorlds, {
       selectedPvpModes: ['Open PvP', 'Optional PvP'],
       selectedRegions: ['Europe'],
-      onlyInitiallyProtected: true,
+      protectionFilter: 'protected',
     })
 
     expect(result.map((world) => world.name)).toEqual(['Antica'])
