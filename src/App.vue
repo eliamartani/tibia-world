@@ -366,7 +366,7 @@ onMounted(() => {
               </div>
 
               <div class="rounded-3xl border border-white/10 bg-slate-950/45 px-4 py-3 text-sm text-slate-300">
-                <p class="mt-1">
+                <p>
                   {{ t('currentSource') }}
                   <span class="font-semibold capitalize text-white">{{ lastLoadSource || t('pending') }}</span>
                 </p>
