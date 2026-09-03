@@ -33,5 +33,6 @@
   "emptyStateFilters": "Keine Welten entsprechen den aktiven Filtern. Löschen Sie einen oder mehrere Filter, um die Ergebnisse zu erweitern.",
   "clearFilters": "Filter löschen",
   "pending": "ausstehend",
-  "live": "Live"
+  "live": "Live",
+  "transferBlocked": "Blockiert"
 }

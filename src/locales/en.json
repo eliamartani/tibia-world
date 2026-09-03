@@ -33,5 +33,6 @@
   "emptyStateFilters": "No worlds match the active filters. Clear one or more filters to widen the results.",
   "clearFilters": "Clear Filters",
   "pending": "pending",
-  "live": "Live"
+  "live": "Live",
+  "transferBlocked": "Blocked"
 }

@@ -50,6 +50,10 @@ const serverMarker = computed(() =>
             </p>
             <p class="mt-2 text-xs font-semibold uppercase tracking-[0.35em] text-white drop-shadow-md">
               {{ world.region }} • {{ world.pvpType }}
+
+              <template v-if="world.transferType === 'blocked'">
+              {{  " • " }} {{ t('transferBlocked') }}
+              </template>
             </p>
             <div class="mt-4 flex justify-center">
               <span

@@ -33,5 +33,6 @@
   "emptyStateFilters": "Ningún mundo coincide con los filtros activos. Limpia uno o más filtros para ampliar los resultados.",
   "clearFilters": "Limpiar Filtros",
   "pending": "pendiente",
-  "live": "En Vivo"
+  "live": "En Vivo",
+  "transferBlocked": "Bloqueado"
 }
