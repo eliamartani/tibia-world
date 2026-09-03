@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import WorldCard from './components/WorldCard.vue'
 import LanguageSelector from './components/LanguageSelector.vue'
+import { useSEO } from './composables/useSEO'
 import {
   applyWorldFilters,
   collectFilterOptions,
@@ -17,7 +18,8 @@ import logo from './assets/logo.png'
 import greenWorld from './assets/green-world.gif'
 import yellowWorld from './assets/yellow-world.gif'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
+const { updateSEO } = useSEO()
 
 const timestampFormatter = new Intl.DateTimeFormat(undefined, {
   dateStyle: 'medium',
@@ -131,7 +133,15 @@ const setProtectionFilter = (value: 'all' | 'protected' | 'unprotected') => {
 }
 
 onMounted(() => {
+  // Initialize SEO with current locale
+  updateSEO(locale.value)
+  // Load worlds data
   void syncWorlds()
+})
+
+// Watch for locale changes and update SEO meta tags
+watch(locale, (newLocale) => {
+  updateSEO(newLocale)
 })
 </script>
 
