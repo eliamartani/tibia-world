@@ -40,6 +40,7 @@ export interface WorldFilters {
   selectedPvpModes: string[]
   selectedRegions: string[]
   protectionFilter: 'all' | 'protected' | 'unprotected'
+  searchQuery: string
 }
 
 export type WorldSortOption =

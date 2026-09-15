@@ -1,5 +1,8 @@
 {
   "playersOnline": "Gracze Online",
+  "searchWorlds": "Szukaj Światów",
+  "searchPlaceholder": "Szukaj według nazwy lub regionu...",
+  "clearSearch": "Wyczyść wyszukiwanie",
   "actions": "Akcje",
   "refreshDescription": "Odśwież tylko wtedy, gdy chcesz nowszych danych.",
   "reload": "Przeładuj",

@@ -4,6 +4,7 @@ import {
   applyWorldFilters,
   collectFilterOptions,
   defaultWorldFilters,
+  hasActiveFilters,
   sortWorlds,
 } from './worldFilters'
 
@@ -61,12 +62,45 @@ describe('worldFilters', () => {
 
   it('applies PvP, region, and protection filters together', () => {
     const result = applyWorldFilters(sampleWorlds, {
+      ...defaultWorldFilters(),
       selectedPvpModes: ['Open PvP', 'Optional PvP'],
       selectedRegions: ['Europe'],
       protectionFilter: 'protected',
     })
 
     expect(result.map((world) => world.name)).toEqual(['Antica'])
+  })
+
+  it('filters by search query matching the world name', () => {
+    const result = applyWorldFilters(sampleWorlds, {
+      ...defaultWorldFilters(),
+      searchQuery: 'ant',
+    })
+
+    expect(result.map((world) => world.name)).toEqual(['Antica'])
+  })
+
+  it('filters by search query matching the region, case- and accent-insensitively', () => {
+    const result = applyWorldFilters(sampleWorlds, {
+      ...defaultWorldFilters(),
+      searchQuery: 'SOÚTH',
+    })
+
+    expect(result.map((world) => world.name)).toEqual(['Zuna'])
+  })
+
+  it('treats a blank search query as no filter', () => {
+    const result = applyWorldFilters(sampleWorlds, {
+      ...defaultWorldFilters(),
+      searchQuery: '   ',
+    })
+
+    expect(result).toEqual(sampleWorlds)
+  })
+
+  it('marks search query as an active filter', () => {
+    expect(hasActiveFilters({ ...defaultWorldFilters(), searchQuery: 'ant' })).toBe(true)
+    expect(hasActiveFilters({ ...defaultWorldFilters(), searchQuery: '  ' })).toBe(false)
   })
 
   it('builds sorted unique options for the sidebar', () => {

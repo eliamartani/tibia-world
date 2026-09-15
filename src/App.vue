@@ -132,6 +132,10 @@ const setProtectionFilter = (value: 'all' | 'protected' | 'unprotected') => {
   filters.protectionFilter = value
 }
 
+const clearSearch = () => {
+  filters.searchQuery = ''
+}
+
 onMounted(() => {
   // Initialize SEO with current locale
   updateSEO(locale.value)
@@ -173,6 +177,36 @@ watch(locale, (newLocale) => {
               </p>
             </div>
           </div>
+
+          <label class="relative block">
+            <span class="sr-only">{{ t('searchWorlds') }}</span>
+            <svg
+              class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <circle cx="9" cy="9" r="6" />
+              <line x1="17" y1="17" x2="13.4" y2="13.4" stroke-linecap="round" />
+            </svg>
+            <input
+              v-model="filters.searchQuery"
+              type="text"
+              :placeholder="t('searchPlaceholder')"
+              class="w-full rounded-2xl border border-white/10 bg-slate-950/45 py-3 pl-10 pr-10 text-sm font-semibold text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300/45"
+            />
+            <button
+              v-if="filters.searchQuery"
+              type="button"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 transition hover:text-white"
+              :aria-label="t('clearSearch')"
+              @click="clearSearch"
+            >
+              &times;
+            </button>
+          </label>
 
           <div class="space-y-4 rounded-4xl border border-white/10 bg-white/5 p-4">
             <div class="flex items-center justify-between gap-3">

@@ -1,16 +1,26 @@
 import type { TibiaWorld, WorldFilters, WorldSortOption } from '../types/tibia'
 
+// strips diacritics so e.g. "sao" matches "São"
+export const normalizeSearchText = (value: string) =>
+  value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+
 export const defaultWorldFilters = (): WorldFilters => ({
   selectedPvpModes: [],
   selectedRegions: [],
   protectionFilter: 'all',
+  searchQuery: '',
 })
 
 export const applyWorldFilters = (
   worlds: TibiaWorld[],
   filters: WorldFilters,
-): TibiaWorld[] =>
-  worlds.filter((world) => {
+): TibiaWorld[] => {
+  const normalizedQuery = normalizeSearchText(filters.searchQuery.trim())
+
+  return worlds.filter((world) => {
     const matchesPvpMode =
       filters.selectedPvpModes.length === 0 ||
       filters.selectedPvpModes.includes(world.pvpType)
@@ -24,8 +34,14 @@ export const applyWorldFilters = (
       (filters.protectionFilter === 'protected' && world.initiallyProtected) ||
       (filters.protectionFilter === 'unprotected' && !world.initiallyProtected)
 
-    return matchesPvpMode && matchesRegion && matchesInitialProtection
+    const matchesSearch =
+      normalizedQuery.length === 0 ||
+      normalizeSearchText(world.name).includes(normalizedQuery) ||
+      normalizeSearchText(world.region).includes(normalizedQuery)
+
+    return matchesPvpMode && matchesRegion && matchesInitialProtection && matchesSearch
   })
+}
 
 export const collectFilterOptions = (worlds: TibiaWorld[]) => ({
   pvpModes: [...new Set(worlds.map((world) => world.pvpType))].sort((left, right) =>
@@ -39,7 +55,8 @@ export const collectFilterOptions = (worlds: TibiaWorld[]) => ({
 export const hasActiveFilters = (filters: WorldFilters) =>
   filters.selectedPvpModes.length > 0 ||
   filters.selectedRegions.length > 0 ||
-  filters.protectionFilter !== 'all'
+  filters.protectionFilter !== 'all' ||
+  filters.searchQuery.trim().length > 0
 
 export const sortWorlds = (worlds: TibiaWorld[], sortOption: WorldSortOption): TibiaWorld[] => {
   const sortedWorlds = [...worlds]
