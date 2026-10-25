@@ -21,7 +21,7 @@ Core value:
 
 - Vue 3 + TypeScript + Vite application shell
 - Tailwind CSS v4 styling
-- TibiaData `/v4/worlds` integration
+- TibiaData `/v5/worlds` integration
 - Local cache backed by `localStorage`
 - Responsive sidebar and card layout
 - Vitest coverage for filter and data-loading behavior
@@ -111,7 +111,7 @@ This project does not currently require any environment variables.
 Check:
 
 - Your internet connection
-- Whether `https://api.tibiadata.com/v4/worlds` is reachable
+- Whether `https://api.tibiadata.com/v5/worlds` is reachable
 - Browser console output for network failures
 
 Helpful recovery steps:

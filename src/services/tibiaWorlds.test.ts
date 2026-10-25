@@ -72,6 +72,7 @@ describe('loadWorlds', () => {
     const secondResult = await loadWorlds()
 
     expect(fetchSpy).toHaveBeenCalledTimes(1)
+    expect(fetchSpy).toHaveBeenCalledWith('https://api.tibiadata.com/v5/worlds')
     expect(firstResult.source).toBe('network')
     expect(secondResult.source).toBe('cache')
     expect(secondResult.worlds.map((world) => world.name)).toEqual(['Antica', 'Belobra', 'Blumera'])

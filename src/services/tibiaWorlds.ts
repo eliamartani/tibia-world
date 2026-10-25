@@ -6,7 +6,7 @@ import type {
   WorldLoadResult,
 } from '../types/tibia'
 
-const API_URL = 'https://api.tibiadata.com/v4/worlds'
+const API_URL = 'https://api.tibiadata.com/v5/worlds'
 const CACHE_KEY = 'tibia-worlds-cache-v2'
 
 let inMemoryCache: CachedWorldPayload | null = null
